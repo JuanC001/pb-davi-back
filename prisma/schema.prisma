@@ -29,17 +29,17 @@ model EventOrganizer {
   owner              User     @relation(fields: [ownerId], references: [id])
   companyName        String
   companyDescription String?
-  Events             Events[]
+  Events             Event[]
 }
 
 enum EventStatus {
-  PENDIENTE
+  PROGRAMADO
   CURSO
   FINALIZADO
   CANCELADO
 }
 
-model Events {
+model Event {
   id               Int            @id @default(autoincrement())
   name             String
   description      String?
@@ -47,9 +47,9 @@ model Events {
   location         String
   startDate        DateTime
   endDate          DateTime
-  startTime        DateTime
-  endTime          DateTime
-  status           EventStatus    @default(PENDIENTE)
+  startTime        String
+  endTime          String
+  status           EventStatus    @default(PROGRAMADO)
   image            String?
   eventOrganizerId Int
   eventOrganizer   EventOrganizer @relation(fields: [eventOrganizerId], references: [id])
