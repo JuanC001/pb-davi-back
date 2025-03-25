@@ -17,10 +17,13 @@ authController.login = async (req, res) => {
 
         const userService = new UserService()
         const user = await userService.findUserByEmail(email)
+        if (!user) {
+            return res.status(400).json({ message: 'Invalid email or password' })
+        }
         const validPassword = bcrypt.compareSync(password, user.password)
 
         if (!validPassword) {
-            return res.status(400).json({ message: 'Invalid password' })
+            return res.status(400).json({ message: 'Invalid email or password' })
         }
 
         delete user.password
