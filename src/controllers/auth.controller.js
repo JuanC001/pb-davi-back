@@ -17,7 +17,12 @@ authController.login = async (req, res) => {
 
         const userService = new UserService()
         const user = await userService.findUserByEmail(email)
-        bcrypt.compareSync(password, user.password)
+        const validPassword = bcrypt.compareSync(password, user.password)
+
+        if (!validPassword) {
+            return res.status(400).json({ message: 'Invalid password' })
+        }
+
         delete user.password
         const token = await generateJWT(user.id, user.email, user.role)
 
