@@ -80,6 +80,7 @@ userEventController.unregisterUserFromEvent = async (req, res) => {
     try {
 
         const { userId, eventId } = req.body;
+        console.log(userId, eventId)
         const userEventService = new UserEventService();
         const userEvent = await userEventService.unregisterUserFromEvent(Number(userId), Number(eventId));
         const eventService = new EventService();

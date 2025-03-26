@@ -19,7 +19,8 @@ export default class EventService {
                 id
             },
             include: {
-                eventOrganizer: true
+                eventOrganizer: true,
+                UserEvent: true
             }
         });
     }
