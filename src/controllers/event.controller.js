@@ -35,7 +35,7 @@ eventController.createEvent = async (req, res) => {
 
         const { name, description, price, location,
             startDate, endDate, startTime, endTime,
-            status, image, eventOrganizerId } = req.body;
+            status, image, eventOrganizerId, capacity, remainingTickets } = req.body;
 
         if (!name || !price || !location || !startDate || !endDate || !startTime || !endTime) {
             return res.status(400).json({ message: 'All fields are required' });
@@ -49,7 +49,7 @@ eventController.createEvent = async (req, res) => {
         const event = await eventService.createEvent({
             name, description, price, location,
             startDate, endDate, startTime, endTime,
-            status, image, eventOrganizerId
+            status, image, eventOrganizerId, capacity, remainingTickets
         });
 
         return res.status(201).json(event);
@@ -66,7 +66,7 @@ eventController.updateEvent = async (req, res) => {
         const { id } = req.params;
         const { name, description, price, location,
             startDate, endDate, startTime, endTime,
-            status, image, eventOrganizerId } = req.body;
+            status, image, eventOrganizerId, capacity, remainingTickets } = req.body;
 
         if (!name || !price || !location || !startDate || !endDate || !startTime || !endTime) {
             return res.status(400).json({ message: 'All fields are required' });
@@ -80,7 +80,7 @@ eventController.updateEvent = async (req, res) => {
         const event = await eventService.updateEvent(Number(id), {
             name, description, price, location,
             startDate, endDate, startTime, endTime,
-            status, image, eventOrganizerId
+            status, image, eventOrganizerId, capacity, remainingTickets
         });
 
         return res.status(200).json(event);
