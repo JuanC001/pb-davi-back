@@ -34,7 +34,9 @@ export default class EventService {
                 endTime: data.endTime,
                 image: data.image,
                 status: data.status || 'PROGRAMADO',
-                eventOrganizerId: data.eventOrganizerId
+                eventOrganizerId: data.eventOrganizerId,
+                capacity: data.capacity,
+                remainingTickets: data.capacity
             }
         });
     }
@@ -55,7 +57,9 @@ export default class EventService {
                 endTime: data.endTime,
                 image: data.image,
                 status: data.status || 'PROGRAMADO',
-                eventOrganizerId: data.eventOrganizerId
+                eventOrganizerId: data.eventOrganizerId,
+                capacity: data.capacity,
+                remainingTickets: data.remainingTickets
             }
         });
     }
