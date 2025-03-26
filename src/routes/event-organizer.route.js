@@ -5,6 +5,7 @@ const router = Router();
 
 router.get('/', eventOrganizerController.getEventOrganizers);
 router.get('/:id', eventOrganizerController.getEventOrganizer);
+router.get('/owner/:ownerId', eventOrganizerController.getEventOrganizerByOwnerId);
 router.post('/', eventOrganizerController.createEventOrganizer);
 router.put('/:id', eventOrganizerController.updateEventOrganizer);
 router.delete('/:id', eventOrganizerController.deleteEventOrganizer);

@@ -37,6 +37,29 @@ eventOrganizerController.getEventOrganizers = async (req, res) => {
         return
     }
 }
+
+eventOrganizerController.getEventOrganizerByOwnerId = async (req, res) => {
+    try {
+
+        const { ownerId } = req.params
+        console.log(ownerId)
+
+        const eventOrganizerService = new EventOrganizerService()
+        const eventOrganizer = await eventOrganizerService.findEventOrganizerByOwnerId(Number(ownerId))
+
+        if (!eventOrganizer) {
+            return res.status(404).json({ message: 'Event Organizer not found' })
+        }
+
+        res.status(200).json(eventOrganizer)
+
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({ message: 'Internal Server Error' })
+        return
+    }
+}
+
 eventOrganizerController.createEventOrganizer = async (req, res) => {
     try {
 

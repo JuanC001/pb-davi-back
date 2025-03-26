@@ -14,7 +14,8 @@ export default class EventOrganizerService {
                         surname: true,
                         email: true
                     }
-                }
+                },
+                Events: true
             }
         })
         return eventOrganizer
