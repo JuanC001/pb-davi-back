@@ -17,7 +17,7 @@ eventOrganizerController.getEventOrganizer = async (req, res) => {
 
     } catch (error) {
 
-        console.log(error)
+        console.error(error)
         res.status(500).json({ message: 'Internal Server Error' })
         return
 
@@ -32,11 +32,33 @@ eventOrganizerController.getEventOrganizers = async (req, res) => {
         res.status(200).json(eventOrganizers)
 
     } catch (error) {
-        console.log(error)
+        console.error(error)
         res.status(500).json({ message: 'Internal Server Error' })
         return
     }
 }
+
+eventOrganizerController.getEventOrganizerByOwnerId = async (req, res) => {
+    try {
+
+        const { ownerId } = req.params
+
+        const eventOrganizerService = new EventOrganizerService()
+        const eventOrganizer = await eventOrganizerService.findEventOrganizerByOwnerId(Number(ownerId))
+
+        if (!eventOrganizer) {
+            return res.status(404).json({ message: 'Event Organizer not found' })
+        }
+
+        res.status(200).json(eventOrganizer)
+
+    } catch (error) {
+        console.error(error)
+        res.status(500).json({ message: 'Internal Server Error' })
+        return
+    }
+}
+
 eventOrganizerController.createEventOrganizer = async (req, res) => {
     try {
 
@@ -64,7 +86,7 @@ eventOrganizerController.createEventOrganizer = async (req, res) => {
         res.status(201).json(eventOrganizer)
 
     } catch (error) {
-        console.log(error)
+        console.error(error)
         res.status(500).json({ message: 'Internal Server Error' })
         return
     }
@@ -95,7 +117,7 @@ eventOrganizerController.updateEventOrganizer = async (req, res) => {
         res.status(200).json(updatedEventOrganizer)
 
     } catch (error) {
-        console.log(error)
+        console.error(error)
         res.status(500).json({ message: 'Internal Server Error' })
         return
     }
@@ -119,7 +141,7 @@ eventOrganizerController.deleteEventOrganizer = async (req, res) => {
         })
 
     } catch (error) {
-        console.log(error)
+        console.error(error)
         res.status(500).json({ message: 'Internal Server Error' })
         return
     }

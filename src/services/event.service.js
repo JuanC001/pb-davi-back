@@ -21,6 +21,18 @@ export default class EventService {
         });
     }
 
+    async getEventsByOrganizerId(eventOrganizerId) {
+        return await prisma.event.findMany({
+            where: {
+                eventOrganizerId
+            }
+        });
+    }
+
+    async getEventsByUserId(userId) {
+
+    }
+
     async createEvent(data) {
         return await prisma.event.create({
             data: {

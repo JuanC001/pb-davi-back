@@ -33,7 +33,7 @@ authController.login = async (req, res) => {
         return
 
     } catch (error) {
-        console.log(error)
+        console.error(error)
         res.status(500).json({ message: 'Internal Server Error' })
         return
     }
@@ -67,7 +67,7 @@ authController.register = async (req, res) => {
         return
 
     } catch (error) {
-        console.log(error)
+        console.error(error)
 
         if (error instanceof PrismaClientKnownRequestError) {
             if (error.code === 'P2002') {
