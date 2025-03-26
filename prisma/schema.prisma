@@ -21,6 +21,7 @@ model User {
   document       String
   role           Role            @default(USER)
   EventOrganizer EventOrganizer?
+  UserEvent      UserEvent[]
 }
 
 model EventOrganizer {
@@ -55,4 +56,17 @@ model Event {
   image            String?
   eventOrganizerId Int
   eventOrganizer   EventOrganizer @relation(fields: [eventOrganizerId], references: [id])
+  UserEvent        UserEvent[]
+}
+
+model UserEvent {
+  userId Int
+  user   User @relation(fields: [userId], references: [id])
+
+  eventId Int
+  event   Event @relation(fields: [eventId], references: [id])
+
+  createdAt DateTime @default(now())
+
+  @@id([userId, eventId])
 }

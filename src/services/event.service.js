@@ -6,6 +6,9 @@ export default class EventService {
         return await prisma.event.findMany({
             include: {
                 eventOrganizer: true
+            },
+            orderBy: {
+                startDate: 'asc'
             }
         });
     }
@@ -25,12 +28,11 @@ export default class EventService {
         return await prisma.event.findMany({
             where: {
                 eventOrganizerId
+            },
+            orderBy: {
+                id: 'asc'
             }
         });
-    }
-
-    async getEventsByUserId(userId) {
-
     }
 
     async createEvent(data) {
