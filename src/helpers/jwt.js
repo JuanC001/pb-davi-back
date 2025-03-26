@@ -10,7 +10,7 @@ export const generateJWT = async (uid, email, role) => {
 
         return token;
     } catch (error) {
-        console.log(error)
+        console.error(error)
         return null;
     }
 
@@ -21,7 +21,7 @@ export const validateJWT = (token) => {
         const { uid, email, role } = verify(token, process.env.SECRET_KEY_JWT);
         return true
     } catch (error) {
-        console.log(error)
+        console.error(error)
         return false;
     }
 }
