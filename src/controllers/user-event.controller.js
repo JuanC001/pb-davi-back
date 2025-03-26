@@ -43,6 +43,15 @@ userEventController.registerUserToEvent = async (req, res) => {
         }
         const eventService = new EventService();
         const event = await eventService.getEvent(Number(eventId));
+        if(!event){
+            res.status(400).json({ message: 'Event not found' });
+            return
+        }
+        if (event.eventOrganizer.ownerId === userId) {
+            res.status(400).json({ message: 'Event Organizer cannot register to own event' });
+            return
+        }
+
         if (event.remainingTickets === 0) {
             res.status(400).json({ message: 'No tickets available' });
             return
